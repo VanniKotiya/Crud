@@ -1,12 +1,33 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
 
+//import routes
+const postroutes = require('./routes/posts');
 
-const port = 8000;
+//app Middleware
+app.use(bodyParser.json());
 
-app.listen(port, () =>{
-    console.log(`App is running on ${port}`);
+app.use(postroutes);
+
+
+const PORT = 8000;
+const DB_URL = 'mongodb+srv://pathumc4:Chamara1@mernapp.xcj7k.mongodb.net/mernCrud?retryWrites=true&w=majority&appName=mernApp';
+
+mongoose.connect(DB_URL)
+.then (() =>{
+    console.log('DB Connected')
+})
+.catch((err) =>{
+    console.log('DB Connection Error',err);
+})
+
+
+
+app.listen(PORT, () =>{
+    console.log(`App is running on ${PORT}`);
 });
 
 
