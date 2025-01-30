@@ -10,6 +10,7 @@ const postroutes = require('./routes/posts');
 //app Middleware
 app.use(bodyParser.json());
 
+//route middleware
 app.use(postroutes);
 
 
@@ -23,8 +24,6 @@ mongoose.connect(DB_URL)
 .catch((err) =>{
     console.log('DB Connection Error',err);
 })
-
-
 
 app.listen(PORT, () =>{
     console.log(`App is running on ${PORT}`);

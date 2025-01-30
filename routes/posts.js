@@ -3,7 +3,6 @@ const Posts = require('../models/posts');
 
 const router = express.Router();
 
-
 // Save posts
 router.post('/post/save', async (req, res) => {
     try {
@@ -18,6 +17,5 @@ router.post('/post/save', async (req, res) => {
         });
     }
 });
-
 
 module.exports = router;
