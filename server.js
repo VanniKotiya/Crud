@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
@@ -15,10 +18,8 @@ app.use(cors());
 //route middleware
 app.use(postroutes);
 
-
-const PORT = 8000;
-const DB_URL = 'mongodb+srv://pathumc4:Chamara1@mernapp.xcj7k.mongodb.net/mernCrud?retryWrites=true&w=majority&appName=mernApp';
-
+const PORT=process.env.PORT;
+const DB_URL=process.env.DB_URL;
 mongoose.connect(DB_URL)
 .then (() =>{
     console.log('DB Connected')
