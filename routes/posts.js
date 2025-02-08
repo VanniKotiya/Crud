@@ -35,6 +35,25 @@ router.get('/post', async (req, res) => {
     }
 });
 
+//Get a specific route
+router.get('/post/:id',async (req,res) => {
+    try {
+        const posts = await Posts.findById(req.params.id);
+        if (!posts) return res.status(404).json({ message: "Post not found" });
+
+        res.status(200).json({
+            success: true,
+            existingPosts: posts
+        });
+    } catch (error) {
+        res.status(500).json({ 
+            success: false,
+            message: "Server error", 
+            error: error.message });
+    }
+    
+});
+
 //Update posts
 router.put('/post/update/:id', async (req, res) => {
     try {
@@ -91,6 +110,7 @@ router.delete('/post/delete/:id', async (req, res) => {
         });
     }
 });
+
 
 
 module.exports = router;
