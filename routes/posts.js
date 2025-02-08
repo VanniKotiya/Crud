@@ -38,7 +38,7 @@ router.get('/post', async (req, res) => {
 //Get a specific route
 router.get('/post/:id',async (req,res) => {
     try {
-        const posts = await Posts.findById(req.params.id);
+        const posts = await Posts.findById(req.params.id).select('-__v');
         if (!posts) return res.status(404).json({ message: "Post not found" });
 
         res.status(200).json({

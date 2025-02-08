@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';  // ✅ Import Link
+import { Link } from 'react-router-dom'; 
 
 export default class Home extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div className="container">
+    <div>
         <p>All posts</p>
         <table className="table">
           <thead>
@@ -37,7 +37,7 @@ export default class Home extends Component {
               <th scope="col">#</th>
               <th scope="col">Topic</th>
               <th scope="col">Description</th>
-              <th scope="col">Post Category</th>
+              <th scope="col">Post Catergory</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -51,7 +51,7 @@ export default class Home extends Component {
                   </Link>
                 </td>
                 <td>{post.description}</td>
-                <td>{post.postCategory}</td>
+                <td>{post.postCatergory}</td>
                 <td>
                   <button className="btn btn-warning">
                     <i className="fas fa-edit"></i>&nbsp;Edit
@@ -66,7 +66,7 @@ export default class Home extends Component {
           </tbody>
         </table>
         <Link to="/add" className="btn btn-success">Create New Post</Link>
-      </div>
+    </div>
     );
   }
 }
