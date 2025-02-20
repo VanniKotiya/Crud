@@ -35,7 +35,7 @@ router.get('/post', async (req, res) => {
     }
 });
 
-//Get a specific route
+//Get a specific post
 router.get('/post/:id',async (req,res) => {
     try {
         const posts = await Posts.findById(req.params.id).select('-__v');
