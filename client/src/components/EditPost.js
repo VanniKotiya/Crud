@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class EditPost extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ export default class EditPost extends Component {
     this.state = {
       topic: "",
       description: "",
-      postCatergory: ""
+      postCatergory: "",
     };
   }
 
@@ -26,9 +27,7 @@ export default class EditPost extends Component {
           });
         }
       })
-      .catch((err) => {
-        console.error("Error fetching post data:", err);
-      });
+      .catch((err) => console.error("Error fetching post data:", err));
   }
 
   handleChange = (e) => {
@@ -48,54 +47,69 @@ export default class EditPost extends Component {
     axios.put(`http://localhost:8000/post/update/${id}`, updatedPost)
       .then((res) => {
         if (res.data.success) {
-          alert("Post Updated Successfully!");
+          alert("✅ Post Updated Successfully!");
           window.location.href = "/";
         }
       })
-      .catch((err) => {
-        console.error("Error updating post:", err);
-      });
+      .catch((err) => console.error("Error updating post:", err));
   };
 
   render() {
     return (
-      <div className="container">
-        <h2>Edit Post</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label">Topic</label>
-            <input 
-              type="text" 
-              className="form-control" 
-              name="topic"
-              value={this.state.topic}
-              onChange={this.handleChange}
-            />
-          </div>
+      <div className="container-fluid mt-4">
+        <div className="card shadow-lg p-4">
+          <h3 className="text-primary text-center">
+            ✏️ Edit Post
+          </h3>
+          <hr />
 
-          <div className="mb-3">
-            <label className="form-label">Description</label>
-            <textarea 
-              className="form-control" 
-              name="description"
-              value={this.state.description}
-              onChange={this.handleChange}
-            ></textarea>
-          </div>
+          <form onSubmit={this.handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label fw-bold">📝 Topic</label>
+              <input 
+                type="text" 
+                className="form-control" 
+                name="topic"
+                value={this.state.topic}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
 
-          <div className="mb-3">
-            <label className="form-label">Category</label>
-            <input 
-              type="text" 
-              className="form-control" 
-              name="postCatergory"
-              value={this.state.postCatergory}
-              onChange={this.handleChange}
-            />
-          </div>
+            <div className="mb-3">
+              <label className="form-label fw-bold">📖 Description</label>
+              <textarea 
+                className="form-control" 
+                name="description"
+                value={this.state.description}
+                onChange={this.handleChange}
+                rows="4"
+                required
+              ></textarea>
+            </div>
 
-          <button type="submit" className="btn btn-success">Update Post</button>
-        </form>
+            <div className="mb-3">
+              <label className="form-label fw-bold">📂 Category</label>
+              <input 
+                type="text" 
+                className="form-control" 
+                name="postCatergory"
+                value={this.state.postCatergory}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+
+            <div className="d-flex justify-content-between">
+              <Link to="/" className="btn btn-secondary">
+                ⬅ Cancel
+              </Link>
+              <button type="submit" className="btn btn-success">
+                ✅ Update Post
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
