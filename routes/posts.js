@@ -5,15 +5,17 @@ const router = express.Router();
 
 // Save posts
 router.post('/post/save', async (req, res) => {
+    console.log("Received data:", req.body); 
+
     try {
         let newPost = new Posts(req.body);
-        await newPost.save(); 
+        await newPost.save();
         return res.status(200).json({
             success: "Post Saved Successfully"
         });
     } catch (err) {
         return res.status(400).json({
-            error: err.message 
+            error: err.message
         });
     }
 });
